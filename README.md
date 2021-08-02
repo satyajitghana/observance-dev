@@ -21,3 +21,9 @@ For now airflow is NOT used directly in the same docker-compose.yml file. But it
 ```bash
 docker-compose up -f airflow/docker-compose.yml
 ```
+
+## Windows Specific Setup
+
+Make sure to use Docker for Windows with WSL2 backend.
+
+Move the `colliers-dev` folder to WSL2 instance, like Ubuntu 20.04, and open VSCode in that. using Windows paths slows down the npm install process really slow, so we have to move the project to WSL2, and docker will just pick it up.
