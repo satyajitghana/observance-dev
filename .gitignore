@@ -1,0 +1,19 @@
+*.code-workspace
+
+# Environment Variables
+.env
+
+# mounted volume
+sites
+
+development
+!development/.vscode
+!development/README.md
+deploy_key
+deploy_key.pub
+
+# Pycharm
+.idea
+
+# VS Code devcontainer
+.devcontainer
