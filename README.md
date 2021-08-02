@@ -1,5 +1,11 @@
 # Colliers Development Environment
 
+replace satyajit-ink with your github username
+
+```
+git clone https://satyajit-ink@github.com/inkers-ai/colliers-dev.git
+```
+
 ## Frappe Setup
 
 Open the devcontainer setup
