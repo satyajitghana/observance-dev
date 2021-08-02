@@ -6,9 +6,6 @@
 # mounted volume
 sites
 
-development
-!development/.vscode
-!development/README.md
 deploy_key
 deploy_key.pub
 
