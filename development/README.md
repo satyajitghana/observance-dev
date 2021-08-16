@@ -33,6 +33,15 @@ bench start
 
 Open http://inkers.localhost:8000
 
+## Install ERPNext
+
+```
+bench get-app --branch version-13 erpnext https://github.com/frappe/erpnext.git
+```
+
+```
+bench --site inkers.localhost install-app erpnext
+```
 
 ## Install the Ink-Colliers App to Site
 
