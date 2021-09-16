@@ -40,7 +40,7 @@ bench --site inkers.localhost clear-cache
 bench start
 ```
 
-Open http://inkers.localhost:8000
+Open <http://inkers.localhost:8000>
 
 ## Install ERPNext (We don't use this anymore)
 
