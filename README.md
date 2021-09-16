@@ -2,7 +2,7 @@
 
 replace satyajit-ink with your github username
 
-```
+```bash
 git clone https://satyajit-ink@github.com/inkers-ai/colliers-dev.git
 ```
 
