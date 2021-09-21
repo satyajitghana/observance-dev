@@ -70,3 +70,17 @@ git add .
 git commit -m "<verb>: <message>"
 git push -u origin <branch>
 ```
+
+## Updating and reinstalling
+
+Update the branch
+
+```bash
+bench switch-to-branch develop frappe --upgrade
+```
+
+NOTE: This will clear all the databases and reinstalls the apps
+
+```bash
+bench --site inkers.localhost --force reinstal
+```
