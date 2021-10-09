@@ -62,6 +62,26 @@ bench --site inkers.localhost install-app observance_app
 bench set-config -g developer_mode true
 ```
 
+## Exporting fixtures
+
+more about it here: <https://frappeframework.com/docs/user/en/python-api/hooks#fixtures>
+
+```bash
+bench --site inkers.localhost export-fixtures
+```
+
+## Allow CORS
+
+edit `site_config.json`
+
+```json
+{
+ ...
+ "allow_cors": "*"
+ ...
+}
+```
+
 ## Updating Observance App to Github
 
 ```bash
@@ -82,5 +102,18 @@ bench switch-to-branch develop frappe --upgrade
 NOTE: This will clear all the databases and reinstalls the apps
 
 ```bash
-bench --site inkers.localhost --force reinstal
+bench --site inkers.localhost --force reinstall
+```
+
+To uninstall and reinstall custom app
+
+```bash
+bench --site inkers.localhost uninstall-app observance_app
+bench --site inkers.localhost install-app observance_app
+```
+
+## Wipe DB and Reinstsall
+
+```bash
+bench reinstall
 ```

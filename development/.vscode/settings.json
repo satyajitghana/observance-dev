@@ -1,4 +1,5 @@
 {
     "python.pythonPath": "frappe-bench/env/bin/python",
-    "debug.node.autoAttach": "disabled"
+    "debug.node.autoAttach": "disabled",
+	"terminal.integrated.shell.linux": "/bin/bash",
 }
