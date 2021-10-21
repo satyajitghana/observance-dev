@@ -70,6 +70,14 @@ more about it here: <https://frappeframework.com/docs/user/en/python-api/hooks#f
 bench --site inkers.localhost export-fixtures
 ```
 
+## Development
+
+Get an interactive python console
+
+```bash
+bench console
+```
+
 ## Allow CORS
 
 edit `site_config.json`
