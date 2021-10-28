@@ -136,6 +136,21 @@ bench reinstall
 
 ## Production Steps
 
+
+### Backup & Restore SQL Backup
+
+```bash
+bench --site inkers.localhost backup --with-files --compress
+```
+
+Copy the SQL file to server
+
+```bash
+bench --site inkers.localhost restore {sql_backup_file} --with-public-files {public_archive} --with-private-files {private_archive}
+```
+
+### Deploy
+
 ```bash
 cd inkers-bench
 bench setup supervisor
