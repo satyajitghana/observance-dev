@@ -78,6 +78,14 @@ Get an interactive python console
 bench console
 ```
 
+### Migrating the app
+
+This might be particularly useful if theres some issue deleting or creating a DocType
+
+```bash
+bench --site inkers.localhost migrate
+```
+
 ## Allow CORS
 
 edit `site_config.json`
