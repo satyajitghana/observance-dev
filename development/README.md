@@ -128,8 +128,35 @@ bench --site inkers.localhost uninstall-app observance_app
 bench --site inkers.localhost install-app observance_app
 ```
 
-## Wipe DB and Reinstsall
+## Wipe DB and Reinstall
 
 ```bash
 bench reinstall
+```
+
+## Production Steps
+
+```bash
+cd inkers-bench
+bench setup supervisor
+sudo ln -s `pwd`/config/supervisor.conf /etc/supervisor/conf.d/frappe-bench.conf
+sudo bench setup sudoers $(whoami)
+bench setup nginx
+bench set-nginx-port inkers.localhost 5000
+sudo ln -s `pwd`/config/nginx.conf /etc/nginx/conf.d/frappe-bench.conf
+```
+
+You might need to edit `config/nginx.conf` and set port to `5000`
+
+Start nginx and supervisor
+
+```bash
+sudo service supervisor start
+sudo service nginx start
+```
+
+Maybe reload supervisor
+
+```bash
+sudo supervisorctl reload
 ```
