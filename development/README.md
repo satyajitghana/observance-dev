@@ -9,18 +9,21 @@ bench init --skip-redis-config-generation --frappe-branch version-13 inkers-benc
 cd inkers-bench
 ```
 
+NOTE: If this is not being setup inside docker, specify localhost instead of redis-cache, redis-queue, redis-socketio
+
 ```bash
 bench set-redis-cache-host redis-cache:6379
 bench set-redis-queue-host redis-queue:6379
 bench set-redis-socketio-host redis-socketio:6379
-
 ```
+
+NOTE: for non-docker specify db-host as localhost
 
 ```bash
 bench new-site inkers.localhost --admin-password admin --db-type postgres --db-host postgresql
 ```
 
-the default super user and password for postgres is `postgres:123`
+the default super user and password for postgres is `postgres:123`, BUT if you used setup-db.sh then specify that username and password
 
 set the postgres login and password
 
@@ -51,7 +54,7 @@ bench --site inkers.localhost install-app erpnext
 
 ## Install the Observance App to Site
 
-replace `satyajit-ink` with your github username
+replace `satyajit-ink` with your github username or your token
 
 ```bash
 bench get-app --branch master observance_app https://satyajit-ink@github.com/inkers-ai/observance_app.git
@@ -61,6 +64,10 @@ bench --site inkers.localhost install-app observance_app
 ```bash
 bench set-config -g developer_mode true
 ```
+
+Make sure to install `install-deps.sh`
+
+Core dependencies: `imagemagick potrace`
 
 ## Exporting fixtures
 
@@ -135,7 +142,6 @@ bench reinstall
 ```
 
 ## Production Steps
-
 
 ### Backup & Restore SQL Backup
 
