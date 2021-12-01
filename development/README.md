@@ -181,3 +181,9 @@ Maybe reload supervisor
 ```bash
 sudo supervisorctl reload
 ```
+
+## Troubleshooting
+
+If for some reason you can login to frappe ui, but it says access denied, its probably because of the cookies not being set, i am not sure how to fix this, it's definitely due to HTTPS not being set, but sometimes it still works. For now waiting for sometime and trying again later works.
+
+Also from the frontend if you can't access then use the IP instead of DNS, that fixes it sometimes.
