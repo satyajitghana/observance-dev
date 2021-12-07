@@ -187,3 +187,40 @@ sudo supervisorctl reload
 If for some reason you can login to frappe ui, but it says access denied, its probably because of the cookies not being set, i am not sure how to fix this, it's definitely due to HTTPS not being set, but sometimes it still works. For now waiting for sometime and trying again later works.
 
 Also from the frontend if you can't access then use the IP instead of DNS, that fixes it sometimes.
+
+## Setup HTTPS
+
+Make sure nothing is running in port 80, We'll use NGINX and Certbot for this
+
+```bash
+sudo apt install certbot python3-certbot-nginx
+```
+
+```bash
+sudo certbot --nginx -d observance.ddns.net
+```
+
+```txt
+server {
+    server_name observance.ddns.net;
+
+        # managed by Certbot
+    listen [::]:5443 ssl ipv6only=on; # managed by Certbot
+    listen 5443 ssl; # managed by Certbot
+    ssl_certificate /etc/letsencrypt/live/observance.ddns.net/fullchain.pem; # managed by Certbot
+    ssl_certificate_key /etc/letsencrypt/live/observance.ddns.net/privkey.pem; # managed by Certbot
+    include /etc/letsencrypt/options-ssl-nginx.conf; # managed by Certbot
+    ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem; # managed by Certbot
+
+        location / {
+                proxy_set_header Host inkers.localhost;
+                proxy_pass http://127.0.0.1:8000;
+        }
+}
+```
+
+To test the config
+
+```bash
+sudo nginx -T
+```

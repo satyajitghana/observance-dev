@@ -1,6 +1,6 @@
 {
     "python.pythonPath": "inkers-bench/env/bin/python",
     "debug.node.autoAttach": "disabled",
-    "terminal.integrated.shell.linux": "/bin/bash",
-    "python.formatting.provider": "black",
+    "terminal.integrated.defaultProfile.linux": "bash",
+    "python.formatting.provider": "black"
 }
