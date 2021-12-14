@@ -182,6 +182,19 @@ Maybe reload supervisor
 sudo supervisorctl reload
 ```
 
+## Updating in Production
+
+```bash
+git pull
+bench --site inkers.localhost migrate
+```
+
+Also after updating you can run
+
+```
+sudo supervisorctl restart all
+```
+
 ## Troubleshooting
 
 If for some reason you can login to frappe ui, but it says access denied, its probably because of the cookies not being set, i am not sure how to fix this, it's definitely due to HTTPS not being set, but sometimes it still works. For now waiting for sometime and trying again later works.
