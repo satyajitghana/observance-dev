@@ -189,9 +189,19 @@ git pull
 bench --site inkers.localhost migrate
 ```
 
+Now you can restore the database, see `Updating and Restoring the Database` above
+
 Also after updating you can run
 
 ```
+sudo supervisorctl restart all
+```
+
+All in One
+
+```bash
+git pull
+bench --site inkers.localhost migrate
 sudo supervisorctl restart all
 ```
 
