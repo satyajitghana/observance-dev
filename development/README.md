@@ -236,7 +236,7 @@ server {
     ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem; # managed by Certbot
 
         location / {
-                proxy_set_header Host inkers.localhost;
+                #proxy_set_header Host inkers.localhost;
                 proxy_set_header X-Frappe-Site-Name inkers.localhost;
                 proxy_pass http://127.0.0.1:8000;
         }
