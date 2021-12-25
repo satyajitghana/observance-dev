@@ -93,6 +93,18 @@ This might be particularly useful if theres some issue deleting or creating a Do
 bench --site inkers.localhost migrate
 ```
 
+## Increase Max Attachment Size
+
+edit `site_config.json` and change `max_file_size` to `104857600`
+
+```json
+{
+    "max_file_size": "314572800"
+}
+```
+
+here the max file size is set to 300mb, its specified in bytes
+
 ## Allow CORS
 
 edit `site_config.json`
@@ -238,6 +250,16 @@ server {
         location / {
                 #proxy_set_header Host inkers.localhost;
                 proxy_set_header X-Frappe-Site-Name inkers.localhost;
+                #add_header Access-Control-Allow-Origin *;
+                #add_header              'Access-Control-Allow-Origin' '$http_origin' always;
+                proxy_pass http://127.0.0.1:8000;
+        }
+
+        location /files {
+                #proxy_set_header Host inkers.localhost;
+                proxy_set_header X-Frappe-Site-Name inkers.localhost;
+                #add_header Access-Control-Allow-Origin *;
+                add_header              'Access-Control-Allow-Origin' '$http_origin' always;
                 proxy_pass http://127.0.0.1:8000;
         }
 
@@ -250,11 +272,12 @@ server {
         add_header X-Content-Type-Options nosniff;
         add_header X-XSS-Protection "1; mode=block";
         add_header Referrer-Policy "same-origin, strict-origin-when-cross-origin";
+        #add_header Access-Control-Allow-Origin *;
 
         # optimizations
         sendfile on;
         keepalive_timeout 15;
-        client_max_body_size 50m;
+        client_max_body_size 500m;
         client_body_buffer_size 16K;
         client_header_buffer_size 1k;
 
