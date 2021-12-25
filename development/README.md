@@ -319,3 +319,28 @@ To test the config
 ```bash
 sudo nginx -T
 ```
+
+## Optimization
+
+To optimize nginx, make sure to serve files using nginx, not frappe, enable compression.
+
+`/etc/nginx/nginx.conf`
+
+```txt
+events {
+        worker_connections 768;
+    #
+    # Let each process accept multiple connections.
+    # Accept as many connections as possible, after nginx gets notification
+    # about a new connection.
+    # May flood worker_connections, if that option is set too low.
+    #
+    multi_accept on;
+
+    #
+    # Preferred connection method for newer linux versions.
+    # Essential for linux, optmized to serve many clients with each thread.
+    #
+    use epoll;
+}
+```
