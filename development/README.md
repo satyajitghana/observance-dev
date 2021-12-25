@@ -155,6 +155,8 @@ bench reinstall
 
 ## Production Steps
 
+Dont forget to fix CORS for `/files` in nginx, also set max file to 500M in nginx and also in `inkers.localhost/site_config.json`
+
 ### Backup & Restore SQL Backup
 
 ```bash
