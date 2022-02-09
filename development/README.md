@@ -39,6 +39,12 @@ bench --site inkers.localhost set-config developer_mode 1
 bench --site inkers.localhost clear-cache
 ```
 
+Setup redis
+
+```bash
+bench setup redis
+```
+
 ```bash
 bench start
 ```
@@ -173,6 +179,7 @@ bench --site inkers.localhost restore {sql_backup_file} --with-public-files {pub
 
 ```bash
 cd inkers-bench
+bench setup redis
 bench setup supervisor
 sudo ln -s `pwd`/config/supervisor.conf /etc/supervisor/conf.d/frappe-bench.conf
 sudo bench setup sudoers $(whoami)
