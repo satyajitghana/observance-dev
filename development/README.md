@@ -12,9 +12,9 @@ cd inkers-bench
 NOTE: If this is not being setup inside docker, specify localhost instead of redis-cache, redis-queue, redis-socketio
 
 ```bash
-bench set-redis-cache-host redis-cache:6379
-bench set-redis-queue-host redis-queue:6379
-bench set-redis-socketio-host redis-socketio:6379
+bench set-redis-cache-host redis-cache:6380
+bench set-redis-queue-host redis-queue:6381
+bench set-redis-socketio-host redis-socketio:6382
 ```
 
 NOTE: for non-docker specify db-host as localhost
