@@ -5,16 +5,37 @@
 ## Initial Setup
 
 ```bash
-bench init --skip-redis-config-generation --frappe-branch version-13 inkers-bench
+bench init --frappe-branch version-13 inkers-bench
 cd inkers-bench
 ```
 
 NOTE: If this is not being setup inside docker, specify localhost instead of redis-cache, redis-queue, redis-socketio
+NOTE: The below commands only need to be run if Redis was not setup in `bench init`
+
+For Localhost Run:
 
 ```bash
-bench set-redis-cache-host redis-cache:6380
-bench set-redis-queue-host redis-queue:6381
-bench set-redis-socketio-host redis-socketio:6382
+bench set-redis-cache-host 127.0.0.1:13000
+bench set-redis-socketio-host 127.0.0.1:12000
+bench set-redis-queue-host 127.0.0.1:11000
+bench setup redis
+```
+
+For Docker Run:
+
+```bash
+bench set-redis-cache-host redis-cache:13000
+bench set-redis-socketio-host redis-socketio:12000
+bench set-redis-queue-host redis-queue:11000
+bench setup redis
+```
+
+add this on top of `Procfile`
+
+```Procfile
+redis_cache: redis-server config/redis_cache.conf
+redis_socketio: redis-server config/redis_socketio.conf
+redis_queue: redis-server config/redis_queue.conf
 ```
 
 NOTE: for non-docker specify db-host as localhost
