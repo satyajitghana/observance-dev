@@ -196,6 +196,8 @@ Copy the SQL file to server
 bench --site inkers.localhost restore {sql_backup_file} --with-public-files {public_archive} --with-private-files {private_archive}
 ```
 
+NOTE: Sometimes there might be bugs with the tables like UNIQUE constraint not being removed, in that case simply modify the .sql file from the backup and fix the issue in the table creation, then simply restore the modified .sql file (also make gunzip)
+
 ### Deploy
 
 ```bash

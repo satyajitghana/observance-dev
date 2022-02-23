@@ -66,6 +66,19 @@ numprocs=1
 process_name=%(program_name)s-%(process_num)d
 
 
+[program:inkers-bench-fr-consumer-kafka]
+command=/home/ubuntu/.local/bin/bench --site inkers.localhost fr-consumer
+priority=4
+autostart=true
+autorestart=true
+stdout_logfile=/home/ubuntu/inkers-bench/logs/fr-consumer-kafka.log
+stderr_logfile=/home/ubuntu/inkers-bench/logs/fr-consumer-kafka.error.log
+user=ubuntu
+stopwaitsecs=1560
+directory=/home/ubuntu/inkers-bench
+killasgroup=false
+numprocs=1
+; process_name=%(program_name)s-%(process_num)d
 
 
 [program:inkers-bench-redis-cache]
@@ -124,9 +137,10 @@ directory=/home/ubuntu/inkers-bench
 
 
 [group:inkers-bench-web]
-programs=inkers-bench-frappe-web,inkers-bench-node-socketio
+programs=inkers-bench-frappe-web,inkers-bench-node-socketio,inkers-bench-node-fsocket
 
-
+[group:inkers-bench-observance]
+programs=inkers-bench-fr-consumer-kafka
 
 [group:inkers-bench-workers]
 programs=inkers-bench-frappe-schedule,inkers-bench-frappe-default-worker,inkers-bench-frappe-short-worker,inkers-bench-frappe-long-worker
