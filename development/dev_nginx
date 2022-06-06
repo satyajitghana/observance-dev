@@ -9,15 +9,17 @@ server {
     include /etc/letsencrypt/options-ssl-nginx.conf; # managed by Certbot
     ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem; # managed by Certbot
 
+    root /home/satyajit/colliers-project/colliers-dev/development/inkers-bench/sites;
+
         location / {
                 #proxy_set_header Host inkers.localhost;
                 proxy_set_header X-Frappe-Site-Name inkers.localhost;
-                #add_header Access-Control-Allow-Origin *;
-                #add_header              'Access-Control-Allow-Origin' '$http_origin' always;
+        	#add_header Access-Control-Allow-Origin *;
+		#add_header              'Access-Control-Allow-Origin' '$http_origin' always;
                 proxy_pass http://127.0.0.1:8000;
         }
 
-        location /observance-socket/socket.io {
+	location /observance-socket/socket.io {
 
                 proxy_http_version 1.1;
                 proxy_set_header Upgrade $http_upgrade;
@@ -28,9 +30,9 @@ server {
                 proxy_set_header Host $scheme://$http_host;
 
                 proxy_pass http://127.0.0.1:9002;
-        }
+	}
 
-        location /socket.io {
+	location /socket.io {
 
                 proxy_http_version 1.1;
                 proxy_set_header Upgrade $http_upgrade;
@@ -41,16 +43,35 @@ server {
                 proxy_set_header Host $scheme://$http_host;
 
                 proxy_pass http://127.0.0.1:9000;
-        }
+	}
 
         location /files {
+                if ($request_method = OPTIONS ) {
+                        add_header Content-Length 0;
+                        add_header Content-Type text/plain;
+                        add_header Access-Control-Allow-Origin *;
+                        add_header Access-Control-Allow-Headers "Origin, X-Requested-With, Content-Type, Accept, Authorization, authorization";
+                        return 200;
+                }
                 #proxy_set_header Host inkers.localhost;
                 proxy_set_header X-Frappe-Site-Name inkers.localhost;
-                add_header Access-Control-Allow-Origin *;
-                #add_header              'Access-Control-Allow-Origin' '$http_origin' always;
+        	add_header Access-Control-Allow-Origin *;
+		#add_header              'Access-Control-Allow-Origin' '$http_origin' always;
+		#root /home/satyajit/colliers-project/colliers-dev/development/inkers-bench/sites;
+		#try_files /inkers.localhost/public/$uri =404;
+                #proxy_pass http://127.0.0.1:8000;
+		try_files /inkers.localhost/public/$uri  =404;
+        }
+	location @webserver {
+                proxy_set_header X-Forwarded-For $remote_addr;
+                proxy_set_header X-Forwarded-Proto $scheme;
+                proxy_set_header X-Frappe-Site-Name inkers.localhost;
+                proxy_set_header Host $host;
+                proxy_set_header X-Use-X-Accel-Redirect True;
+                proxy_read_timeout 120;
+                proxy_redirect off;
+
                 proxy_pass http://127.0.0.1:8000;
-                #root /home/satyajit/colliers-project/colliers-dev/development/inkers-bench/sites;
-                #try_files /inkers.localhost/public/$uri =404;
         }
 
         #proxy_buffer_size 128k;

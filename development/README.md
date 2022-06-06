@@ -184,6 +184,18 @@ bench reinstall
 
 Dont forget to fix CORS for `/files` in nginx, also set max file to 500M in nginx and also in `inkers.localhost/site_config.json`
 
+Add frontend_baseurl to site_config
+
+`site_config.json`
+
+```json
+{
+    ...
+    "frontend_baseurl": "https://observance.inkers.ai:3444"
+    ...
+}
+```
+
 ### Backup & Restore SQL Backup
 
 ```bash
