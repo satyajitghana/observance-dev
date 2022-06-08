@@ -186,12 +186,27 @@ Dont forget to fix CORS for `/files` in nginx, also set max file to 500M in ngin
 
 Add frontend_baseurl to site_config
 
+also mention the http_port and host_name, this will be used for assets that are attached in the email (this should be of the backend only)
+
 `site_config.json`
 
 ```json
 {
     ...
-    "frontend_baseurl": "https://observance.inkers.ai:3444"
+    "frontend_baseurl": "https://observance.inkers.ai:3444",
+    "host_name": "observance.ddns.net",
+    "http_port": "3443"
+    ...
+}
+```
+
+`common_site_config.json`
+
+```json
+{
+    ...
+    "restart_supervisor_on_update": false,
+    "restart_systemd_on_update": false,
     ...
 }
 ```
