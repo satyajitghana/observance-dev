@@ -3,7 +3,7 @@
 ; killasgroup=true --> send kill signal to child processes too
 
 [program:inkers-bench-frappe-web]
-command=/home/ubuntu/inkers-bench/env/bin/gunicorn -b 127.0.0.1:8000 -w 5 -t 120 frappe.app:application --preload
+command=/home/ubuntu/inkers-bench/env/bin/gunicorn -b 127.0.0.1:8000 --worker-class=sync --worker-connections=1000 -w 4 -t 120 frappe.app:application --preload
 priority=4
 autostart=true
 autorestart=true
@@ -80,6 +80,19 @@ killasgroup=false
 numprocs=1
 ; process_name=%(program_name)s-%(process_num)d
 
+[program:inkers-bench-fr-onboarding-service]
+command=/home/ubuntu/.local/bin/bench --site inkers.localhost fr-onboarding
+priority=4
+autostart=true
+autorestart=true
+stdout_logfile=/home/ubuntu/inkers-bench/logs/fr-onboarding.log
+stderr_logfile=/home/ubuntu/inkers-bench/logs/fr-onboarding.error.log
+user=ubuntu
+stopwaitsecs=1560
+directory=/home/ubuntu/inkers-bench
+killasgroup=false
+numprocs=1
+; process_name=%(program_name)s-%(process_num)d
 
 [program:inkers-bench-redis-cache]
 command=/usr/bin/redis-server /home/ubuntu/inkers-bench/config/redis_cache.conf
@@ -140,7 +153,7 @@ directory=/home/ubuntu/inkers-bench
 programs=inkers-bench-frappe-web,inkers-bench-node-socketio,inkers-bench-node-fsocket
 
 [group:inkers-bench-observance]
-programs=inkers-bench-fr-consumer-kafka
+programs=inkers-bench-fr-consumer-kafka,inkers-bench-fr-onboarding-service
 
 [group:inkers-bench-workers]
 programs=inkers-bench-frappe-schedule,inkers-bench-frappe-default-worker,inkers-bench-frappe-short-worker,inkers-bench-frappe-long-worker
