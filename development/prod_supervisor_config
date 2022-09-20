@@ -66,13 +66,27 @@ numprocs=1
 process_name=%(program_name)s-%(process_num)d
 
 
-[program:inkers-bench-fr-consumer-kafka]
-command=/home/ubuntu/.local/bin/bench --site inkers.localhost fr-consumer
+[program:inkers-bench-fr-consumer-kafka-CP00712]
+command=/home/ubuntu/.local/bin/bench --site inkers.localhost fr-consumer --bootstrap-server cogence.inkers.ai:32094 --project-name CP00712
 priority=4
 autostart=true
 autorestart=true
-stdout_logfile=/home/ubuntu/inkers-bench/logs/fr-consumer-kafka.log
-stderr_logfile=/home/ubuntu/inkers-bench/logs/fr-consumer-kafka.error.log
+stdout_logfile=/home/ubuntu/inkers-bench/logs/fr-consumer-kafka-CP00712.log
+stderr_logfile=/home/ubuntu/inkers-bench/logs/fr-consumer-kafka-CP00712.error.log
+user=ubuntu
+stopwaitsecs=1560
+directory=/home/ubuntu/inkers-bench
+killasgroup=false
+numprocs=1
+; process_name=%(program_name)s-%(process_num)d
+
+[program:inkers-bench-fr-consumer-kafka-CP00803]
+command=/home/ubuntu/.local/bin/bench --site inkers.localhost fr-consumer --bootstrap-server cogence.inkers.ai:32094 --project-name CP00803
+priority=4
+autostart=true
+autorestart=true
+stdout_logfile=/home/ubuntu/inkers-bench/logs/fr-consumer-kafka-CP00803.log
+stderr_logfile=/home/ubuntu/inkers-bench/logs/fr-consumer-kafka-CP00803.error.log
 user=ubuntu
 stopwaitsecs=1560
 directory=/home/ubuntu/inkers-bench
@@ -153,7 +167,7 @@ directory=/home/ubuntu/inkers-bench
 programs=inkers-bench-frappe-web,inkers-bench-node-socketio,inkers-bench-node-fsocket
 
 [group:inkers-bench-observance]
-programs=inkers-bench-fr-consumer-kafka,inkers-bench-fr-onboarding-service
+programs=inkers-bench-fr-consumer-kafka-CP00712,inkers-bench-fr-consumer-kafka-CP00803,inkers-bench-fr-onboarding-service
 
 [group:inkers-bench-workers]
 programs=inkers-bench-frappe-schedule,inkers-bench-frappe-default-worker,inkers-bench-frappe-short-worker,inkers-bench-frappe-long-worker
