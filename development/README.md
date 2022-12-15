@@ -112,6 +112,15 @@ Get an interactive python console
 bench console
 ```
 
+## NGINX Extra settting
+
+Make sure to add these in every location of the nginx proxy
+
+```
+proxy_set_header Authorization $http_x_frappe_authorization;
+add_header Access-Control-Allow-Headers "Authorization,DNT,X-Mx-ReqToken,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,X-Frappe-Authorization";
+```
+
 ### Migrating the app
 
 This might be particularly useful if theres some issue deleting or creating a DocType
@@ -200,6 +209,8 @@ also mention the http_port and host_name, this will be used for assets that are 
 }
 ```
 
+Also add `s3_root_prefix` in `site_config.json`, this will be used as `{bucket_name}/{s3_root_prefix}` when the files are uploaded to s3
+
 `common_site_config.json`
 
 ```json
@@ -224,6 +235,8 @@ bench --site inkers.localhost restore {sql_backup_file} --with-public-files {pub
 ```
 
 NOTE: Sometimes there might be bugs with the tables like UNIQUE constraint not being removed, in that case simply modify the .sql file from the backup and fix the issue in the table creation, then simply restore the modified .sql file (also make gunzip)
+
+If you want to see more of how db is setup see `frappe/frappe/database/postgres/setup_db.py`
 
 ### Deploy
 
