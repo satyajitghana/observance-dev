@@ -260,6 +260,19 @@ sudo service supervisor start
 sudo service nginx start
 ```
 
+You might face some problem with nginx, unknown log format main
+
+edit `/etc/nginx/nginx.conf`
+
+Add this inside the http directive
+
+```txt
+log_format  main  '$remote_addr - $remote_user [$time_local] "$request" '
+                      '$status $body_bytes_sent "$http_referer" '
+                      '"$http_user_agent" "$http_x_forwarded_for"';
+
+```
+
 Maybe reload supervisor
 
 ```bash
@@ -414,3 +427,24 @@ events {
     use epoll;
 }
 ```
+
+## Server Maintenance
+
+### Logout all users
+
+```
+bench destroy-all-sessions
+sudo supervisorctl restart all
+```
+
+## Common Problems
+
+404 not found for assets
+
+this is because of permission issues in ubuntu
+
+```
+chmod 755 /home/${USER}
+```
+
+should fix it
